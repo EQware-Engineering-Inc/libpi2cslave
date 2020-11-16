@@ -1,4 +1,4 @@
-# π<sup>2</sup>c Slave -- An i<sup>2</sup>c slave library for the Raspberry Pi
+# π<sup>2</sup>c Slave — An i<sup>2</sup>c slave library for the Raspberry Pi
 
 It is a bit uncommon to run an I<sup>2</sup>C interface in slave mode on a SoC
 running Linux. So it can be a bit hard to find a good driver or library for
@@ -54,20 +54,25 @@ Here is an example which reads a two byte address over I2C and writes back
 simulated data from that address
 
 ```c
-#include "libpi2cslave.h"
+#include "pi2cslave.h"
 #include <stdint.h>
 #include <stdio.h>
 
-bool callback(addr_t, uint8_t * out)
+#define I2C_SLAVE_ADDR (42)
+
+bool callback(addr_t addr, uint8_t * out)
 {
-    // Simulate data by data[addr] = addr % 0xFF
+    // Simulate data by data[addr] = addr & 0xFF
     *out = addr & 0xFF;
     return true; // We had data
 }
 
 int main() 
 {
-    if (!bsc_i2c_slv_init(I2C_SLAVE_ADDR)) {
+    if (!init_bcm_reg_mem()) {
+        return 1;
+    }
+    if (!init_bsc_i2c_slv(I2C_SLAVE_ADDR)) {
         return 1;
     }
 
@@ -79,12 +84,13 @@ int main()
             addr_got += bsc_i2c_read_poll(addr_buf + addr_got, sizeof(addr_buf) - addr_got);
         }
 
-        printf("Got addr 0x%04x\n", addr)
+        printf("Got addr 0x%04x\n", addr);
 
-        int written = bsc_i2c_write(read_reg, addr);
-        printf("Master read %d bytes from us\n", written)
+        int written = bsc_i2c_write(callback, addr);
+        printf("Master read %d bytes from us\n", written);
     }
 
     return 0;
 }
+
 ```
