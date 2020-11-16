@@ -41,7 +41,7 @@ the BCM ARM Peripherals doc describes. This issue is
 [discussed on various forum posts](https://www.raspberrypi.org/forums/viewtopic.php?p=1061380).
 
 Libpi2cslave implements a workaround for this issue using another undocumented
-feature/bug in the BSC. Through experimentation it was found that togging the
+feature/bug in the BSC. Through experimentation it was found that toggling the
 Control Reg TX Enable bit off and on pops one byte from the TX FIFO. This TX
 toggle can be repeated until the TX FIFO has been cleared. Further
 characterization determined that this method seems to work because whenever the
