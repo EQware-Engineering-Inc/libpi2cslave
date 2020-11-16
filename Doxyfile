@@ -1,0 +1,34 @@
+# Doxyfile 1.8.20
+
+PROJECT_NAME           = "LibPi2CSlave"
+PROJECT_NUMBER         = 0.1
+PROJECT_BRIEF          = "An I2C slave library for the Raspberry Pi"
+PROJECT_LOGO           =
+OUTPUT_DIRECTORY       = docs
+
+OPTIMIZE_OUTPUT_FOR_C  = YES
+MARKDOWN_SUPPORT       = YES
+
+SHOW_FILES             = YES
+INPUT                  = src
+INPUT_ENCODING         = UTF-8
+FILE_PATTERNS          = *.c *.h
+
+SOURCE_BROWSER         = YES
+REFERENCES_LINK_SOURCE = YES
+SOURCE_TOOLTIPS        = YES
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = .
+HTML_COLORSTYLE_HUE    = 21
+HTML_COLORSTYLE_SAT    = 94
+HTML_COLORSTYLE_GAMMA  = 240
+
+GENERATE_DOCSET        = NO
+GENERATE_LATEX         = NO
+GENERATE_RTF           = NO
+GENERATE_MAN           = NO
+GENERATE_XML           = NO
+GENERATE_DOCBOOK       = NO
+GENERATE_AUTOGEN_DEF   = NO
+GENERATE_PERLMOD       = NO
